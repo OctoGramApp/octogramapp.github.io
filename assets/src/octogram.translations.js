@@ -1,7 +1,7 @@
 let cachedTranslations = {};
 
 const AVAILABLE_LANGUAGES = [
-  'en', 'it', 'id', 'es'
+  'en', 'it', 'id', 'es', 'pl'
 ];
 
 const TRANSLATIONS_REF = {
