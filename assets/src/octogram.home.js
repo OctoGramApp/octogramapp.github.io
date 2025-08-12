@@ -1,6 +1,6 @@
-import {calculateSize, clearPage, fixInjectionTags, generateWaveGradient} from "./octogram.utils.js";
+import { calculateSize, clearPage, fixInjectionTags, generateWaveGradient } from "./octogram.utils.js";
 import * as header from "./octogram.header.js";
-import {getStringRef} from "./octogram.translations.js";
+import { getStringRef } from "./octogram.translations.js";
 import * as footer from "./octogram.footer.js";
 import * as changelog from "./octogram.changelog.js";
 import * as privacyPolicy from "./octogram.privacy.js";
@@ -38,19 +38,19 @@ function init() {
 	pageContainer.appendChild(footer.createElement());
 
 	document.body.appendChild(pageContainer);
-	
+
 	loadVersions();
-	
+
 	if (!particlesWorker) {
 		particlesWorker = new Worker('/assets/lib/particles-worker.js', { type: 'module' });
 	}
-	
+
 	window.addEventListener('resize', onResize);
-	
+
 	const canvasBoundingRect = particlesCanvas.getBoundingClientRect();
 	particlesCanvas.width = canvasBoundingRect.width;
 	particlesCanvas.height = canvasBoundingRect.height;
-	
+
 	const offscreen = particlesCanvas.transferControlToOffscreen();
 	particlesWorker.postMessage({ canvas: offscreen }, [offscreen]);
 }
@@ -74,7 +74,7 @@ function onResize() {
 		}
 
 		particlesWorker.postMessage({ canvas: false });
-		
+
 		particlesOnResizeTimeout = setTimeout(() => {
 			const canvasBoundingRect = particlesCanvas.getBoundingClientRect();
 			particlesWorker.postMessage({ resize: true, width: canvasBoundingRect.width, height: canvasBoundingRect.height });
@@ -157,22 +157,22 @@ function generateAiFeatures() {
 	messageTitle.classList.add('title');
 	messageTitle.textContent = getStringRef('AI_TITLE');
 	messageTitle.appendChild(lampIcon);
-	
+
 	const featuresList = document.createElement('div');
 	featuresList.classList.add('features-list');
 	featuresList.appendChild(createFeature(getStringRef('AI_FEAT_1'), getStringRef('AI_FEAT_1_DESC'), 'ManyProvidersFeat1.png'));
 	featuresList.appendChild(createFeature(getStringRef('AI_FEAT_2'), getStringRef('AI_FEAT_2_DESC'), 'ChatContextFeat2.png'));
 	featuresList.appendChild(createFeature(getStringRef('AI_FEAT_3'), getStringRef('AI_FEAT_3_DESC'), 'CustomModelsFeat3.png', true));
-	
+
 	const featuresContainer = document.createElement('div');
 	featuresContainer.classList.add('features-container');
 	featuresContainer.appendChild(messageTitle);
 	featuresContainer.appendChild(featuresList);
-	
+
 	const features = document.createElement('div');
 	features.classList.add('features');
 	features.appendChild(featuresContainer);
-	
+
 	return features;
 }
 
@@ -180,39 +180,51 @@ function createFeature(title, description, image, fromBottom = false) {
 	const featureTitle = document.createElement('div');
 	featureTitle.classList.add('feature-title');
 	featureTitle.textContent = title;
-	
+
 	const featureDescription = document.createElement('div');
 	featureDescription.classList.add('feature-description');
 	featureDescription.textContent = description;
-	
+
+	const textWrapper = document.createElement('div');
+	textWrapper.classList.add('feature-text');
+	textWrapper.appendChild(featureTitle);
+	textWrapper.appendChild(featureDescription);
+
 	const shadow = document.createElement('div');
 	shadow.classList.add('shadow');
 	const realImage = document.createElement('img');
 	realImage.classList.add('real-image');
-	realImage.src = '/assets/images/'+image;
+	realImage.src = '/assets/images/' + image;
 	const deviceFrame = document.createElement('img');
 	deviceFrame.classList.add('frame');
 	deviceFrame.src = '/assets/images/DeviceFrameTelegram.Android.svg';
+
 	const featureImage = document.createElement('div');
 	featureImage.classList.add('feature-image');
 	featureImage.appendChild(shadow);
 	featureImage.appendChild(realImage);
 	featureImage.appendChild(deviceFrame);
-	
+
 	const feature = document.createElement('div');
 	feature.classList.add('feature');
 	feature.classList.toggle('from-bottom', fromBottom);
-	feature.appendChild(featureTitle);
-	feature.appendChild(featureDescription);
-	feature.appendChild(featureImage);
-	
+
+	if (fromBottom) {
+		feature.appendChild(featureImage);
+		feature.appendChild(textWrapper);
+	} else {
+		feature.appendChild(textWrapper);
+		feature.appendChild(featureImage);
+	}
+
 	return feature;
 }
+
 
 function generateFeatures() {
 	const background = document.createElement('div');
 	background.classList.add('background');
-	
+
 	const leftPartSticker = document.createElement('lottie-player');
 	leftPartSticker.toggleAttribute('autoplay');
 	leftPartSticker.toggleAttribute('loop');
@@ -224,28 +236,28 @@ function generateFeatures() {
 	leftPart.classList.add('left-part');
 	leftPart.appendChild(leftPartSticker);
 	leftPart.appendChild(leftPartTitle);
-	
+
 	const rightPart = document.createElement('div');
 	rightPart.classList.add('right-part');
 	rightPart.appendChild(createDeviceWithMockup('AppearanceGen1.png'));
 	rightPart.appendChild(createDeviceWithMockup('AppearanceGen2.png'));
 	rightPart.appendChild(createDeviceWithMockup('AppearanceGen3.png'));
-	
+
 	const featuresContent = document.createElement('div');
 	featuresContent.classList.add('content');
 	featuresContent.appendChild(leftPart);
 	featuresContent.appendChild(rightPart);
-	
+
 	const upperWaves = document.createElement('div');
 	upperWaves.classList.add('waves');
 	initBackground(upperWaves);
-	
+
 	const features = document.createElement('div');
 	features.classList.add('features-standard');
 	features.appendChild(background);
 	features.appendChild(featuresContent);
 	features.appendChild(upperWaves);
-	
+
 	return features;
 }
 
@@ -254,7 +266,7 @@ function createDeviceWithMockup(image) {
 	shadow.classList.add('shadow');
 	const realImage = document.createElement('img');
 	realImage.classList.add('real-image');
-	realImage.src = '/assets/images/'+image;
+	realImage.src = '/assets/images/' + image;
 	const featureImage = document.createElement('div');
 	featureImage.classList.add('device-image');
 	featureImage.appendChild(shadow);
@@ -294,7 +306,7 @@ function generateDownload() {
 
 	const separator = document.createElement('div');
 	separator.classList.add('separator');
-	separator.style.setProperty('--text', '"'+getStringRef('DOWNLOAD_OR')+'"');
+	separator.style.setProperty('--text', '"' + getStringRef('DOWNLOAD_OR') + '"');
 
 	const stores = document.createElement('div');
 	stores.classList.add('stores');
@@ -335,11 +347,11 @@ function appendStores(stores) {
 }
 
 function generateStore({
-						   iconUrl,
-						   id,
-						   href,
-						   isUnavailable = false
-					   }) {
+	iconUrl,
+	id,
+	href,
+	isUnavailable = false
+}) {
 	const storeIconElement = document.createElement('img');
 	storeIconElement.src = iconUrl;
 	const storeIconContainer = document.createElement('div');
@@ -389,7 +401,7 @@ function loadVersions() {
 		loadVersionsWithResponse(precachedResponse);
 	} else {
 		const XML = new XMLHttpRequest();
-		XML.open('GET', 'https://api.github.com/repos/OctoGramApp/OctoGram/releases?cache='+Math.random().toString(), true);
+		XML.open('GET', 'https://api.github.com/repos/OctoGramApp/OctoGram/releases?cache=' + Math.random().toString(), true);
 		XML.send();
 		XML.addEventListener('readystatechange', (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
@@ -407,7 +419,7 @@ function loadVersions() {
 function loadVersionsWithResponse(response) {
 	let selectedRelease = response[0];
 	if (selectedRelease['prerelease']) {
-		for(const release of response) {
+		for (const release of response) {
 			if (!release['prerelease']) {
 				selectedRelease = release;
 				break;
@@ -416,7 +428,7 @@ function loadVersionsWithResponse(response) {
 	}
 
 	let sizeSum = 0;
-	for(const asset of selectedRelease['assets']) {
+	for (const asset of selectedRelease['assets']) {
 		sizeSum += asset['size'];
 	}
 	sizeSum /= selectedRelease['assets'].length;
