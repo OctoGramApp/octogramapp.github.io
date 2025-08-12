@@ -64,7 +64,7 @@ const TRANSLATIONS_REF = {
 	CHANGELOG_DOWNLOAD_SUBTITLE_SUGGESTION: 'The {0} version should be the most suitable and stable one for your device.',
 	CHANGELOG_DOWNLOAD_SELECT: 'Select your option',
 	CHANGELOG_DOWNLOAD_BUTTON: 'Download',
-	
+
 	AI_TITLE: 'Now with AI',
 	AI_FEAT_1: 'So many providers. Total freedom.',
 	AI_FEAT_1_DESC: 'Access the power of Gemini, ChatGPT, and OpenRouter — all in one place, ready when you need them most.',
@@ -72,7 +72,7 @@ const TRANSLATIONS_REF = {
 	AI_FEAT_2_DESC: 'Automatically use past messages to boost replies. Use Ask on Media to get instant insights from photos, videos, and more.',
 	AI_FEAT_3: 'Create your own AI. Unlimited possibilities.',
 	AI_FEAT_3_DESC: 'Design fully customizable models with your own prompts. Tailor OctoGram AI to your unique style and needs.',
-	
+
 	FT_T: 'All the\n<b>customizations</b>\nyou like.',
 
 	DOWNLOAD_TITLE: 'The experience begins',
@@ -118,17 +118,17 @@ function getStringRef(name, ...args) {
 
 	if (args.length) {
 		const isSortObject = args.some((e) => typeof e == 'object');
-		if(isSortObject){
+		if (isSortObject) {
 			const splittedString = string.split('{');
 			let temporaryString = '';
 
-			for(const part of splittedString){
-				if(part[1] === '}' && !isNaN(parseInt(part[0]))){
+			for (const part of splittedString) {
+				if (part[1] === '}' && !isNaN(parseInt(part[0]))) {
 					const isElement = args[part[0]] instanceof HTMLElement;
-					const repartSet = '<smali data-id="'+part[0]+'"></smali>';
+					const repartSet = '<smali data-id="' + part[0] + '"></smali>';
 					temporaryString += isElement && repartSet || args[part[0]];
 					temporaryString += part.slice(2);
-				}else{
+				} else {
 					temporaryString += part;
 				}
 			}
@@ -136,16 +136,16 @@ function getStringRef(name, ...args) {
 			const newGeneratedElement = document.createElement('span');
 			newGeneratedElement.classList.add('dynamic-translation');
 			newGeneratedElement.innerHTML = temporaryString;
-			for(const element of newGeneratedElement.childNodes){
-				if(element.tagName === 'SMALI' && element.dataset.id){
+			for (const element of newGeneratedElement.childNodes) {
+				if (element.tagName === 'SMALI' && element.dataset.id) {
 					element.replaceWith(args[element.dataset.id]);
 				}
 			}
 
 			return newGeneratedElement;
-		}else{
-			for(const [id, arg] of args.entries()){
-				string = string.replaceAll('{'+id+'}', arg);
+		} else {
+			for (const [id, arg] of args.entries()) {
+				string = string.replaceAll('{' + id + '}', arg);
 			}
 		}
 	}
@@ -168,7 +168,7 @@ function getTextNodeByStringRef(name, ...args) {
 
 function getLanguageCode() {
 	if (typeof window.navigator.language != 'undefined') {
-		for(const lang of window.navigator.language.split('-')) {
+		for (const lang of window.navigator.language.split('-')) {
 			if (AVAILABLE_LANGUAGES.includes(lang.toLowerCase())) {
 				if (lang.toLowerCase() === 'es') {
 					return 'es-ES';
