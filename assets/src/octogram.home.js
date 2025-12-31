@@ -232,9 +232,43 @@ function generateFeatures() {
 	rightPart.appendChild(createDeviceWithMockup('AppearanceGen3.png'));
 	
 	const featuresContent = document.createElement('div');
-	featuresContent.classList.add('content');
+	featuresContent.classList.add('content', 'customization-style');
 	featuresContent.appendChild(leftPart);
 	featuresContent.appendChild(rightPart);
+
+  const separator = document.createElement('div');
+  separator.classList.add('wavy-underline');
+  separator.textContent = 'octo'.repeat(15);
+
+  const privacyContentSticker = document.createElement('lottie-player');
+	privacyContentSticker.toggleAttribute('autoplay');
+	privacyContentSticker.toggleAttribute('loop');
+	privacyContentSticker.src = '/assets/animations/_112_CODE_OUT.json';
+  const privacyContentTitleContent = document.createElement('div');
+  privacyContentTitleContent.classList.add('title');
+  privacyContentTitleContent.innerHTML = fixInjectionTags(getStringRef('PRIVACY_GLANCE'));
+  const privacyContentTitle = document.createElement('div');
+  privacyContentTitle.classList.add('top-part');
+  privacyContentTitle.appendChild(privacyContentSticker);
+  privacyContentTitle.appendChild(privacyContentTitleContent);
+  
+  const privacyContentViews = document.createElement('div');
+  privacyContentViews.classList.add('privacy-views');
+  privacyContentViews.appendChild(generatePrivacyContentPreviewWithGlance(
+    'PrivacyView1.png',
+    ['PrivacyView1Glance1.png', 'PrivacyView1Glance2.png'],
+    true
+  ));
+  privacyContentViews.appendChild(generatePrivacyContentPreviewWithGlance(
+    'PrivacyView2.png',
+    ['PrivacyView2Glance1.png', 'PrivacyView2Glance2.png', 'PrivacyView1Glance1.png', 'PrivacyView1Glance2.png'],
+    false
+  ));
+
+  const privacyContent = document.createElement('div');
+  privacyContent.classList.add('privacy-content');
+  privacyContent.appendChild(privacyContentTitle);
+  privacyContent.appendChild(privacyContentViews);
 	
 	const upperWaves = document.createElement('div');
 	upperWaves.classList.add('waves');
@@ -244,9 +278,41 @@ function generateFeatures() {
 	features.classList.add('features-standard');
 	features.appendChild(background);
 	features.appendChild(featuresContent);
+  features.appendChild(separator);
+  features.appendChild(privacyContent);
 	features.appendChild(upperWaves);
 	
 	return features;
+}
+
+function generatePrivacyContentPreviewWithGlance(image, glanceViewsList, mustRemoveOnSmallScreens) {
+  const mainImage = document.createElement('img');
+  mainImage.classList.add('main-image');
+  mainImage.src = '/assets/images/'+image;
+	const shadow = document.createElement('div');
+	shadow.classList.add('shadow');
+
+  const glanceViews = document.createElement('div');
+  glanceViews.classList.add('glance-views');
+  let i = 0;
+  for (const image of glanceViewsList) {
+    const glanceImage = document.createElement('img');
+    glanceImage.classList.add('view');
+    glanceImage.classList.toggle('on-small', i >= 2);
+    glanceImage.dataset.i = i;
+    glanceImage.src = '/assets/images/'+image;
+    glanceViews.appendChild(glanceImage);
+    i++;
+  }
+
+  const singlePrivacyPreview = document.createElement('div');
+  singlePrivacyPreview.classList.add('single-privacy-preview');
+  singlePrivacyPreview.classList.toggle('hide-on-small', mustRemoveOnSmallScreens);
+  singlePrivacyPreview.appendChild(mainImage);
+  singlePrivacyPreview.appendChild(shadow);
+  singlePrivacyPreview.appendChild(glanceViews);
+
+  return singlePrivacyPreview;
 }
 
 function createDeviceWithMockup(image) {

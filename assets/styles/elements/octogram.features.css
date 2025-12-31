@@ -5,6 +5,8 @@ body > .page > .features-standard {
     display: flex;
     align-items: center;
     justify-content: center;
+	flex-direction: column;
+	padding-block: 150px;
     overflow: hidden;
 }
 
@@ -141,4 +143,157 @@ body > .page > .features-standard .content .right-part .device-image img.real-im
     body > .page > .features-standard .content .right-part .device-image {
         transform: scale(1.8);
     }
+}
+
+body > .page > .features-standard .wavy-underline {
+	color: transparent;
+	margin-top: -100px;
+	margin-bottom: 50px;
+	z-index: 1;
+	text-decoration-color: #695bf5;
+	text-decoration-style: wavy;
+	text-decoration-line: underline;
+	max-width: 80vw;
+}
+
+@media screen and (max-width: 1000px) {
+	body > .page > .features-standard .wavy-underline {
+		margin-top: 150px;
+	}
+}
+
+
+body > .page > .features-standard .privacy-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	z-index: 1;
+}
+
+body > .page > .features-standard .privacy-content .top-part {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+body > .page > .features-standard .privacy-content .top-part lottie-player {
+	width: 100px;
+	height: 100px;
+}
+
+body > .page > .features-standard .privacy-content .top-part .title {
+	color: white;
+	line-height: 40px;
+	font-size: 2.5em;
+	font-weight: 600;
+}
+
+body > .page > .features-standard .privacy-content .top-part .title .bold {
+	color: #695bf5;
+}
+
+body > .page > .features-standard .privacy-content .privacy-views {
+	margin-top: 50px;
+	margin-bottom: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 70vw;
+	gap: 350px;
+}
+
+body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview {
+	width: 50%;
+	position: relative;
+}
+
+@media screen and (max-width: 1700px) {
+	body > .page > .features-standard .privacy-content .privacy-views {
+		gap: 0;
+	}
+	
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview.hide-on-small {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .main-image {
+		width: 40vw;
+	}
+
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview {
+		width: auto;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .main-image {
+		height: 70vh;
+	}
+}
+
+body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .shadow {
+    position: absolute;
+    height: 50%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 20%, transparent, transparent);
+    width: 100%;
+    transform: rotate(45deg) translateX(50%) translateY(-12%);
+    z-index: -1;
+	top: 0;
+}
+
+@media screen and (max-width: 1000px) {
+    body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .shadow {
+        display: none;
+    }
+}
+
+body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views {
+	pointer-events: none;
+}
+
+body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view {
+	width: 300px;
+	z-index: 2;
+	position: absolute;
+	border-radius: 20px;
+	border: 3px solid #100629;
+}
+
+@media screen and (min-width: 1700px) {
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view.on-small {
+		display: none;
+	}
+}
+
+body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view[data-i="0"] {
+	top: 150px;
+	left: -180px;
+}
+
+body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view[data-i="1"] {
+	bottom: 20px;
+	left: 150px;
+}
+
+@media screen and (max-width: 1700px) {
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view[data-i="0"] {
+		z-index: -1;
+		left: -150px;
+	}
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view[data-i="1"] {
+		z-index: -1;
+		left: -150px;
+	}
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view[data-i="2"] {
+		left: 60%;
+		top: 100px;
+	}
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view[data-i="3"] {
+		left: 60%;
+		bottom: 20px;
+	}
 }

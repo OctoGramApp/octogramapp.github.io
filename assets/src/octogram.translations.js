@@ -64,6 +64,8 @@ const TRANSLATIONS_REF = {
 	CHANGELOG_DOWNLOAD_SUBTITLE_SUGGESTION: 'The {0} version should be the most suitable and stable one for your device.',
 	CHANGELOG_DOWNLOAD_SELECT: 'Select your option',
 	CHANGELOG_DOWNLOAD_BUTTON: 'Download',
+
+  PRIVACY_GLANCE: '<b>Privacy</b> at a glance',
 	
 	AI_TITLE: 'Now with AI',
 	AI_FEAT_1: 'So many providers. Total freedom.',

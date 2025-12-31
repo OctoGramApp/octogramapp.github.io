@@ -41,7 +41,7 @@ body > .page > .features .features-container .features-list {
 body > .page > .features .features-container .features-list .feature {
     flex: 1;
     background: #12062a;
-    min-height: 700px;
+    min-height: 750px;
     padding: 30px;
     border-radius: 15px;
     box-sizing: border-box;
@@ -53,11 +53,15 @@ body > .page > .features .features-container .features-list .feature {
     body > .page > .features .features-container .features-list .feature {
         min-height: 650px;
     }
+
+    body > .page > .features .features-container .features-list .feature .feature-image {
+      width: 60% !important;
+    }
 }
 
 @media screen and (max-width: 600px) {
     body > .page > .features .features-container .features-list .feature {
-        min-height: 550px;
+        min-height: 600px;
     }
 }
 

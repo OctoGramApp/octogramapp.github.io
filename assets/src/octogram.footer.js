@@ -13,7 +13,7 @@ function createElement() {
 	const linksContainer = document.createElement('div');
 	linksContainer.classList.add('links');
 	appendLinkContainer(linksContainer, 'site');
-	appendLinkContainer(linksContainer, 'github');
+	//appendLinkContainer(linksContainer, 'github');
 	appendLinkContainer(linksContainer, 'telegram');
 
 	const footerTextFork = document.createElement('a');
@@ -22,7 +22,7 @@ function createElement() {
 	footerTextFork.textContent = getStringRef('FOOTER_TEXT_1');
 	const footerText = document.createElement('div');
 	footerText.classList.add('text');
-	footerText.textContent = 'Octogram © ' + new Date().getFullYear().toString() + ' - ';
+	footerText.textContent = 'Octogram © 2023-' + new Date().getFullYear().toString() + ' - ';
 	footerText.appendChild(footerTextFork);
 
 	const footerContainer = document.createElement('div');
@@ -85,7 +85,7 @@ function appendLinkContainer(container, id) {
 			}));
 			break;
 		}
-		case 'github': {
+		/*case 'github': {
 			singleLinkContainer.appendChild(generateContainerTitle(
 				getStringRef('FOOTER_GITHUB_TITLE')
 			));
@@ -110,7 +110,7 @@ function appendLinkContainer(container, id) {
 				openOnBlank: true
 			}));
 			break;
-		}
+		}*/
 		case 'telegram': {
 			singleLinkContainer.appendChild(generateContainerTitle(
 				getStringRef('FOOTER_TELEGRAM_TITLE')
