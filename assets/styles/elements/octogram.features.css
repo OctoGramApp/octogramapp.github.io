@@ -154,6 +154,28 @@ body > .page > .features-standard .wavy-underline {
 	text-decoration-style: wavy;
 	text-decoration-line: underline;
 	max-width: 80vw;
+	overflow: hidden;
+	position: relative;
+}
+
+body > .page > .features-standard .wavy-underline::before {
+	content: "";
+	position: absolute;
+	top: 10px;
+	left: 0;
+	height: 100%;
+	width: 40px;
+	background: linear-gradient(90deg, #100627, transparent);
+}
+
+body > .page > .features-standard .wavy-underline::after {
+	content: "";
+	position: absolute;
+	top: 10px;
+	right: 0;
+	height: 100%;
+	width: 40px;
+	background: linear-gradient(90deg, transparent, #100627);
 }
 
 @media screen and (max-width: 1000px) {
@@ -176,6 +198,12 @@ body > .page > .features-standard .privacy-content .top-part {
 	align-items: center;
 	justify-content: center;
 	gap: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+	body > .page > .features-standard .privacy-content .top-part {
+		flex-direction: column;
+	}
 }
 
 body > .page > .features-standard .privacy-content .top-part lottie-player {
@@ -295,5 +323,11 @@ body > .page > .features-standard .privacy-content .privacy-views .single-privac
 	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view[data-i="3"] {
 		left: 60%;
 		bottom: 20px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	body > .page > .features-standard .privacy-content .privacy-views .single-privacy-preview .glance-views .view {
+		max-width: 200px;
 	}
 }
